@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.Tile;
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel implements  Runnable {
     public int maxScreenRow = 12;
     public int screenWidth = tileSize * maxScreenCol;
     public int screenHeight = tileSize * maxScreenRow;
+    public boolean soundOn = true;
 
     //WORLD SETTINGS
     public final int maxWorldCol = 50;
@@ -31,7 +33,8 @@ public class GamePanel extends JPanel implements  Runnable {
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler(this);
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     Thread gameThread;
@@ -55,6 +58,11 @@ public class GamePanel extends JPanel implements  Runnable {
         playMusic(5);
     }
 
+    public void sprint(int newSpeed) {
+        if (player.sprintAllowed)
+        player.speed = newSpeed;
+
+    }
 //    public void zoomInOut(int i) {
 //
 //        if (checkerZoom > -27) {
@@ -160,17 +168,24 @@ public class GamePanel extends JPanel implements  Runnable {
         g2.dispose();
     }
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
     public void stopMusic() {
 
-        sound.stop();
+        music.stop();
     }
     public void playSE(int i) {
 
-        sound.setFile(i);
-        sound.play();
+//        if (soundOn){
+//            sound.stop();
+//        }
+        se.setFile(i);
+        se.play();
+//        if (soundOn) {
+//            sound.setFile(5);
+//            sound.play();
+//        }
     }
 }

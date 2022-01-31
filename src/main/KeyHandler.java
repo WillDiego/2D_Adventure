@@ -12,6 +12,7 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     GamePanel gp;
     Entity entity;
+    Main sound;
 
     public KeyHandler(Entity entity) {
         this.entity = entity;
@@ -43,6 +44,18 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_P) {
+            if (gp.soundOn) {
+                gp.stopMusic();
+                gp.soundOn = false;
+            } else if (!gp.soundOn){
+                gp.playMusic(5);
+                gp.soundOn = true;
+            }
+        }
+        if (code == KeyEvent.VK_SHIFT) {
+            gp.sprint(6);
+        }
 //        if (code == KeyEvent.VK_UP) {
 //
 //            gp.zoomInOut(1);
@@ -69,6 +82,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_SHIFT) {
+            gp.sprint(4);
         }
     }
 }

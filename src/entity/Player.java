@@ -18,6 +18,7 @@ public class Player<speed> extends  Entity {
     public final int screenY;
     int h = 1;
     int hasKey = 0;
+    public boolean sprintAllowed = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -164,7 +165,7 @@ public class Player<speed> extends  Entity {
                     break;
                 case "Boots":
                     gp.playSE(2);
-                    speed +=1;
+                    sprintAllowed = true;
                     gp.obj[i] = null;
                     break;
             }
