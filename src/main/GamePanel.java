@@ -9,6 +9,7 @@ import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.security.PublicKey;
 
 public class GamePanel extends JPanel implements  Runnable {
 
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel implements  Runnable {
     Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;
 
     //ENTITY AND OBJECT
@@ -146,6 +148,8 @@ public class GamePanel extends JPanel implements  Runnable {
     public void update() {
         player.update();
     }
+
+    //LOWER DOWN MEANS THE FRONT
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
@@ -164,6 +168,9 @@ public class GamePanel extends JPanel implements  Runnable {
 
         //player
         player.draw(g2);
+
+        //UI
+        ui.draw(g2);
 
         g2.dispose();
     }
