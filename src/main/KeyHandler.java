@@ -10,6 +10,8 @@ import java.security.Key;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    //Debug
+    boolean checkDrawTime = false;
     GamePanel gp;
     Entity entity;
     Main sound;
@@ -55,6 +57,18 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_SHIFT) {
             gp.sprint(6);
+        }
+
+        //DEBUG
+        if (code == KeyEvent.VK_T) {
+            if (!checkDrawTime) {
+                checkDrawTime = true;
+
+            }
+            else if (checkDrawTime) {
+                checkDrawTime = false;
+
+            }
         }
 //        if (code == KeyEvent.VK_UP) {
 //

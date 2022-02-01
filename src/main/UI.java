@@ -4,17 +4,21 @@ import object.OBJ_Key;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class UI {
 
     GamePanel gp;
     //declare font
-    Font publicPixel_35, publicPixel_30, publicPixel_40B;
+    Font publicPixel_35, publicPixel_30, publicPixel_40B, publicPixel_20;
     BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+
+    double playTime;
+    DecimalFormat dFormat = new DecimalFormat("#0.000");
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -22,9 +26,11 @@ public class UI {
         publicPixel_35 = new Font("PublicPixel", Font.PLAIN, 35);
         publicPixel_30 = new Font("PublicPixel", Font.PLAIN, 30);
         publicPixel_40B = new Font("PublicPixel", Font.PLAIN, 45);
+        publicPixel_20 = new Font("PublicPixel", Font.PLAIN, 20);
 
 
-        OBJ_Key key = new OBJ_Key();
+
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
 
     }
@@ -51,18 +57,21 @@ public class UI {
 
             text = "You found the treasure!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
             x = gp.screenWidth/2 - textLength/2;
             y = gp.screenHeight/2 - (gp.tileSize*2);
             g2.drawString(text, x, y);
 
+            text = "Your time is:" + dFormat.format(playTime) + "!";
+            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.screenWidth/2 - textLength/2;
+            y = gp.screenHeight/2 + (gp.tileSize*4);
+            g2.drawString(text, x, y);
+
             g2.setFont(publicPixel_40B);
             g2.setColor(Color.yellow);
-
             text = "CONGRATULATIONS!";
             //get length of congrats
             textLength = (int) (g2.getFontMetrics().getStringBounds(text, g2).getWidth());
-
             x = gp.screenWidth/2 - textLength/2;
             y = gp.screenHeight/2 + (gp.tileSize*2);
             g2.drawString(text, x, y);
@@ -76,6 +85,11 @@ public class UI {
             g2.drawString("x", 70, 56);
             g2.setFont(publicPixel_35);
             g2.drawString(" " + gp.player.hasKey, 73, 56);
+
+            //TIME
+            g2.setFont(publicPixel_20);
+            playTime +=(double) 1/60;
+            g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize*11, 56);
 
             //MESSAGE
             if (messageOn) {
