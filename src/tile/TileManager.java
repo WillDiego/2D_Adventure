@@ -25,10 +25,18 @@ public class TileManager {
         tile = new Tile[50];
         mapTileNum = new int [gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
+        // loadMap("/maps/world01.txt");
         loadMap("/maps/worldV2.txt");
     }
 
     public void getTileImage() {
+        // setup(0, "grass00", false);
+        // setup(1, "wall", false);
+        // setup(2, "water", false);
+        // setup(3, "earth", false);
+        // setup(4, "tree", false);
+        // setup(5, "sand", false);
+        // setup(6, "grass01", false);
 
         setup(0, "grass00", false);
         setup(1, "grass00", false);
@@ -72,7 +80,11 @@ public class TileManager {
         setup(38, "road12", false);
         setup(39, "earth", false);
         setup(40, "wall", true);
-        setup(41, "tree", true);
+        setup(41, "tree00", true);
+        setup(42, "tree01", true);
+        setup(43, "tree02", true);
+        setup(44, "tree03", true);
+        setup(45, "tree04", false);
 
 
     }
@@ -83,11 +95,17 @@ public class TileManager {
 
         try {
             tile[index] = new Tile();
-            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName + ".png"));
+            String imagePath = "/tiles/" + imageName + ".png";
+            // System.out.println("Loading image from: " + imagePath);
+            InputStream is = getClass().getResourceAsStream(imagePath);
+            if (is == null) {
+                throw new IOException("Resource not found: " + imagePath);
+            }
+            tile[index].image = ImageIO.read(is);
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
-
-        } catch (IOException e){
+    
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
