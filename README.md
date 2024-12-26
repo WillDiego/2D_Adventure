@@ -1,13 +1,19 @@
 # Will's Game
 
-
 Compile
 
 ```
 javac -d out -sourcepath src src/main/Main.java
 ```
 
-Run
+Run on Windows
+
 ```
- java -cp "out;res" main.Main
+java -cp "out;res" main.Main
+```
+
+Run on Mac
+
+```
+java -cp "out:res" main.Main
 ```
