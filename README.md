@@ -22,6 +22,6 @@ java -cp "out:res" main.Main
 
 Save as jar
 
-'''
+```
 jar cfm KeyQuest.jar manifest.txt -C out . -C res .
-'''
+```
