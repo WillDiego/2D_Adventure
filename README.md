@@ -1,5 +1,7 @@
 # Will's Game
 
+![Gameplay](Gameplay.gif)
+
 Compile
 
 ```
