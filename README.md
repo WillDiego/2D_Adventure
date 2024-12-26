@@ -1,4 +1,4 @@
-# Will's Game
+# KeyQuest Game
 
 ![Gameplay](Gameplay.gif)
 
@@ -19,3 +19,9 @@ Run on Mac
 ```
 java -cp "out:res" main.Main
 ```
+
+Save as jar
+
+'''
+jar cfm KeyQuest.jar manifest.txt -C out . -C res .
+'''
