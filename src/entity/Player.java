@@ -20,6 +20,7 @@ public class Player<speed> extends  Entity {
     int h = 1;
     public int hasKey = 0;
     public boolean sprintAllowed = false;
+    int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -99,6 +100,7 @@ public class Player<speed> extends  Entity {
             else if (keyH.rightPressed) {
                 direction = "right";
             }
+            
 
             //check tile collison
             collisionOn = false;
@@ -126,6 +128,7 @@ public class Player<speed> extends  Entity {
                 if (spriteNum == 1 && h == 1) {
                     spriteNum = 2;
                     h = 3;
+                    spriteCounter = 0;
                 }
                 else if (spriteNum == 2) {
                     spriteNum = 1;
@@ -135,17 +138,27 @@ public class Player<speed> extends  Entity {
                     else if (h == 1) {
                         spriteNum = 1;
                     }
+                    spriteCounter = 0;
                 }
                 else if (spriteNum == 3 && h == 3) {
                     spriteNum = 2;
                     h = 1;
+                    spriteCounter = 0;
                 }
-                else {
-                    spriteNum = 1;
-                    h = 1;
-                }
-                spriteCounter = 0;
             }
+            
+        }
+        else {
+            standCounter++;
+
+            if (standCounter == 20) {
+                spriteNum = 2;
+                h=1;
+                standCounter = 0;
+            }
+            // spriteNum = 1;
+            // h = 1;
+            // spriteCounter = 0;
         }
     }
 
